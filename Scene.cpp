@@ -6,8 +6,6 @@ SceneManager::SceneManager(void)
 	max_scene = now_scene = 0;
 	memset(&stack,0,sizeof(stack));
 	stack.p = -1;
-	
-
 }
 
 SceneManager::~SceneManager(void)
@@ -40,8 +38,8 @@ void SceneManager::ReleaseScene(void)
 
 }
 
-//Scene·Î ³Ñ¾î¿À´Â Æ÷ÀÎÅÍÀÇ ¸Ş¸ğ¸® °ü¸®´Â Á÷Á¢ÇÏ¹Ç·Î »ı¼ºÀÚ·Î ³Ñ°ÜÁÙ°Í
-// ¸®ÅÏ : Scene number
+//Sceneë¡œ ë„˜ì–´ì˜¤ëŠ” í¬ì¸í„°ì˜ ë©”ëª¨ë¦¬ ê´€ë¦¬ëŠ” ì§ì ‘í•˜ë¯€ë¡œ ìƒì„±ìë¡œ ë„˜ê²¨ì¤„ê²ƒ
+// ë¦¬í„´ : Scene number
 int SceneManager::AddScene(Scene* s)
 {
 	scene_arr[max_scene] = s;
@@ -105,7 +103,7 @@ int SceneManager::SceneChange(int n, int opt)
 {
 	static int start = 0;
 	
-	//stack.data[stack.p] ¿¡¼­ n Àå¸éÀ¸·Î ÀüÈ¯. opt ¹æ½ÄÀ¸·Î ÀüÈ¯
+	//stack.data[stack.p] ì—ì„œ n ì¥ë©´ìœ¼ë¡œ ì „í™˜. opt ë°©ì‹ìœ¼ë¡œ ì „í™˜
 	if(opt) SceneOff(opt);
 	
 	if(start) scene_arr[stack.data[stack.p]]->SceneEnd();
@@ -135,7 +133,7 @@ int SceneManager::SceneCall(int n, int opt)
 	stack.data[stack.p + 1] = n;
 	stack.p ++;
 
-	//ÇØ´ç n ½ºÅØÀÇ scene ÃÊ±âÈ­
+	//í•´ë‹¹ n ìŠ¤í…ì˜ scene ì´ˆê¸°í™”
 	scene_arr[stack.data[stack.p]]->SceneBegin();
 	//Change Animation
 	if(stack.p != 0)
@@ -149,7 +147,7 @@ int SceneManager::SceneReturn( int opt)
 	if(stack.p <=0 )
 		return -1;
 
-	//ÇØ´ç n ½ºÅØÀÇ scene ÃÊ±âÈ­
+	//í•´ë‹¹ n ìŠ¤í…ì˜ scene ì´ˆê¸°í™”
 	scene_arr[stack.data[stack.p]]->SceneEnd();
 
 	stack.p --;
@@ -262,38 +260,38 @@ int SceneManager::ScratchRightTurn()
 
 //--------------------------- Scene Driver (Default Templete)
 Scene::Scene(void)
-{	//Scene Å¬·¡½º¸¦ ÃÊ±âÈ­ÇÕ´Ï´Ù.
+{	//Scene í´ë˜ìŠ¤ë¥¼ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
 
 }
 
 Scene::~Scene(void)
-{	//Scene Å¬·¡½º¸¦ ÆÄ±«ÇÕ´Ï´Ù.
+{	//Scene í´ë˜ìŠ¤ë¥¼ íŒŒê´´í•©ë‹ˆë‹¤.
 
 }
 
 int Scene::EventProcess(HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam)
-{	//ÀÌº¥Æ® ÇÁ·Î½ÃÀú »ğÀÔ
+{	//ì´ë²¤íŠ¸ í”„ë¡œì‹œì € ì‚½ì…
 	return 0;
 }
 
 int Scene::Draw(void)
-{	//±×¸®´Â ·çÆ¾À» Áı¾î³Ö½À´Ï´Ù.
+{	//ê·¸ë¦¬ëŠ” ë£¨í‹´ì„ ì§‘ì–´ë„£ìŠµë‹ˆë‹¤.
 	return 0;
 }
 
 int Scene::Process(void)
-{	//Ã³¸®ÇÏ´Â ·çÆ¾À» Áı¾î³Ö½À´Ï´Ù.
+{	//ì²˜ë¦¬í•˜ëŠ” ë£¨í‹´ì„ ì§‘ì–´ë„£ìŠµë‹ˆë‹¤.
 
 	return 0;
 }
 
 void Scene::SceneBegin(void)
-{	//SceneÀÌ ½ÃÀÛµÉ¶§ µ¥ÀÌÅÍ¸¦ ·ÎµåÇÕ´Ï´Ù.
+{	//Sceneì´ ì‹œì‘ë ë•Œ ë°ì´í„°ë¥¼ ë¡œë“œí•©ë‹ˆë‹¤.
 
 }
 
 void Scene::SceneEnd(void)
-{	//SceneÀÌ ½ÃÀÛµÉ¶§ µ¥ÀÌÅÍ¸¦ ÇØÁ¦ÇÕ´Ï´Ù.
+{	//Sceneì´ ì‹œì‘ë ë•Œ ë°ì´í„°ë¥¼ í•´ì œí•©ë‹ˆë‹¤.
 
 }
 
